@@ -9,11 +9,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install EAS
+          cache: npm
+      - name: Install EAS CLI
         run: npm install -g eas-cli
-      - name: Install deps
-        run: npm install --legacy-peer-deps
-      - name: Build APK
+      - name: Install project deps
+        run: |
+          npm install --legacy-peer-deps
+          npx expo --version
+          npx eas --version
+      - name: Build APK on Expo Cloud
+        run: |
+          echo $EXPO_TOKEN | head -c 10
+          eas build --platform android --profile preview --non-interactive --no-wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --profile preview --non-interactive --no-wait
