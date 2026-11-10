@@ -1,4 +1,34 @@
-"icon": "./icon.png",
-"splash": { "image": "./splash-icon.png" ... },
-"adaptiveIcon": { "foregroundImage": "./adaptive-icon.png" },
-"favicon": "./favicon.png"
+{
+  "expo": {
+    "name": "ZAN DELIVERY",
+    "slug": "zan-delivery",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./icon.png",
+    "splash": {
+      "image": "./splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.zandelivery.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./favicon.png"
+    },
+    "description": "Application for request delivery",
+    "extra": {
+      "eas": {
+        "projectId": "a086ea42-7f30-4b9c-84bf-450cb6c633bf"
+      }
+    }
+  }
+}
