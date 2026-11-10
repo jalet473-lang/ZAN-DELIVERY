@@ -1,7 +1,6 @@
 name: Build ZAN APK
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,9 +9,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-      - run: npm install
-      - run: eas build --platform android --profile preview --non-interactive
+      - name: Install EAS
+        run: npm install -g eas-cli
+      - name: Install deps
+        run: npm install --legacy-peer-deps
+      - name: Build APK
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas build --platform android --profile preview --non-interactive --no-wait
