@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
           
       - uses: actions/setup-java@v4
         with:
@@ -21,20 +22,20 @@ jobs:
           
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-        
-      - name: Install dependencies
-        run: |
-          npm install -g eas-cli expo-cli
-          npm install
+        with:
+          accept-android-sdk-licenses: true
           
-      - name: Prebuild Android
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Prebuild
         run: npx expo prebuild --platform android --clean
         
       - name: Build APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleRelease --no-daemon
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
