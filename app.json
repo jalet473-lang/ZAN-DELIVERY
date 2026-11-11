@@ -2,9 +2,15 @@
   "expo": {
     "name": "ZAN DELIVERY",
     "slug": "zan-delivery",
+    "owner": "zan-delivery",
     "icon": "./assets/icon.png",
     "android": {
       "package": "com.zandelivery.app"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "zan-delivery-app"
+      }
     }
   }
 }
