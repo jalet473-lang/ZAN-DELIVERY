@@ -1,1 +1,23 @@
-"projectId": "a086ea42-7f30-4b9c-84bf-450cb6c633bf"
+{
+  "cli": {
+    "version": ">= 13.5.3"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
