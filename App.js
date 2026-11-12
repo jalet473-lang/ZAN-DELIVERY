@@ -1,16 +1,12 @@
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>ZAN DELIVERY</Text>
-      <Text style={styles.subtitle}>App Inafanya Kazi Boss! ✅</Text>
+    <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: 30, fontWeight: 'bold' }}>ZAN DELIVERY</Text>
+      <Text style={{ fontSize: 18, marginTop: 20 }}>Karibu Boss!</Text>
+      <Text style={{ fontSize: 14, marginTop: 10, color: 'green' }}>App Iko Sawa Sasa ✅</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffffff' },
-  title: { fontSize: 28, fontWeight: 'bold', color: '#000' },
-  subtitle: { fontSize: 16, marginTop: 10, color: 'green' }
-});
