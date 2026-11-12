@@ -9,6 +9,11 @@
       "backgroundColor": "#ffffff",
       "resizeMode": "contain"
     },
+    "extra": {
+      "eas": {
+        "projectId": "a086ea42-7f30-4b9c-84bf-450cb6c633bf"
+      }
+    },
     "android": {
       "package": "com.zandelivery.app"
     }
