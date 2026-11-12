@@ -1,25 +1,24 @@
-{
-  "expo": {
-    "name": "ZAN DELIVERY",
-    "slug": "zan-delivery",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "backgroundColor": "#ffffff",
-      "resizeMode": "contain"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "c374b150-6929-4d17-a2e7-e0c6f0d0eeed"
-      }
-    },
-    "android": {
-      "package": "com.zandelivery.app",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    }
-  }
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>ZAN DELIVERY</Text>
+      <Text>Karibu!</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  }
+});
