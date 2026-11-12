@@ -1,14 +1,18 @@
 {
-  "cli": {
-    "version": ">= 5.9.3"
-  },
   "build": {
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "cache": {
+        "disabled": true
+      }
     },
-    "production": {}
-  },
-  "submit": {
-    "production": {}
+    "production": {
+      "cache": {
+        "disabled": true
+      }
+    }
   }
 }
