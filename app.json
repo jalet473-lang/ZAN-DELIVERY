@@ -14,10 +14,6 @@
     },
     "android": {
       "package": "com.zandelivery.app"
-    },
-    "splash": {
-      "backgroundColor": "#ffffff",
-      "resizeMode": "contain"
     }
   }
 }
