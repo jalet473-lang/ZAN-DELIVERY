@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image, TextInput, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput, Alert } from 'react-native';
 
 const MENU = [
   { id: 1, name: 'Biriani Kuku', price: 15000, shop: 'Forodhani Food' },
@@ -30,7 +30,7 @@ export default function App() {
   if (screen === 'login') {
     return (
       <View style={s.center}>
-        <Image source={require('./zan-logo.png')} style={s.logo} resizeMode="contain" />
+        <Text style={{fontSize:70}}>🛵</Text>
         <Text style={s.title}>ZAN DELIVERY</Text>
         <Text style={s.sub}>Iko Sawa Sasa ✅</Text>
         <TextInput style={s.input} value={phone} onChangeText={setPhone} keyboardType="phone-pad" placeholder="Namba ya Simu" />
@@ -95,4 +95,36 @@ export default function App() {
         {orders.map(o => (
           <View key={o.id} style={s.card}><Text style={s.bold}>#{o.id} - {o.item}</Text><Text>{o.mteja} - {o.status}</Text>
           <TouchableOpacity style={s.btn} onPress={() => setOrders(orders.map(x => x.id===o.id ? {...x, status:'Cooking - 15min'} : x))}><Text style={s.btnT}>KUBALI - INAPIKWA</Text></TouchableOpacity>
-          <TouchableOpac
+          <TouchableOpacity style={[s.btn,{backgroundColor:'green', marginTop:5}]} onPress={() => setOrders(orders.map(x => x.id===o.id ? {...x, status:'Tayari Kuchukuliwa'} : x))}><Text style={s.btnT}>TAYARI KWA KUCHUKULIWA</Text></TouchableOpacity></View>
+        ))}
+        <TouchableOpacity style={s.back} onPress={() => setScreen('roles')}><Text>⬅ Badilisha Role</Text></TouchableOpacity>
+      </ScrollView>
+    );
+  }
+
+  return (
+    <ScrollView style={s.bg}>
+      <View style={s.header}><Text style={s.hT}>ADMIN - WEWE 👑</Text><Text style={s.hSub}>Pesa LIVE - {phone}</Text></View>
+      <View style={s.moneyBox}><Text style={{color:'white', fontSize:16}}>JUMLA LEO</Text><Text style={{color:'#FF8C00', fontSize:32, fontWeight:'bold'}}>{totalPesa.toLocaleString()} TZS</Text></View>
+      <View style={s.card}><Text>Source 1 - Commission Mgahawa (20%): {commission.toLocaleString()} TZS</Text></View>
+      <View style={s.card}><Text>Source 2 - Delivery Fee: {deliveryFee.toLocaleString()} TZS</Text></View>
+      <View style={s.card}><Text>Source 3 - Matangazo / Kodi Dereva: {ads.toLocaleString()} TZS</Text></View>
+      <Text style={s.sec}>Oda Zote LIVE</Text>
+      {orders.map(o => (<View key={o.id} style={s.card}><Text style={s.bold}>#{o.id} {o.item}</Text><Text>{o.mteja} - {o.status} - {o.total.toLocaleString()} TZS</Text></View>))}
+      <TouchableOpacity style={s.back} onPress={() => setScreen('roles')}><Text>⬅ Badilisha Role</Text></TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+const s = StyleSheet.create({
+  bg:{flex:1, backgroundColor:'#f2f2f2'}, center:{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#fff', padding:20},
+  title:{fontSize:28, fontWeight:'bold'}, sub:{color:'green', marginTop:5, marginBottom:15},
+  input:{borderWidth:1, borderColor:'#ddd', width:'100%', padding:12, borderRadius:8, marginBottom:12},
+  btn:{backgroundColor:'#FF8C00', padding:12, borderRadius:8, alignItems:'center', marginTop:8},
+  btnT:{color:'white', fontWeight:'bold'}, roleBtn:{backgroundColor:'#0B3D91', padding:15, borderRadius:10, width:'100%', marginTop:10, alignItems:'center'},
+  header:{backgroundColor:'#0B3D91', padding:25, paddingTop:45}, hT:{color:'white', fontSize:24, fontWeight:'bold'}, hSub:{color:'#FF8C00', marginTop:4},
+  card:{backgroundColor:'white', margin:10, marginHorizontal:15, padding:15, borderRadius:10},
+  bold:{fontWeight:'bold', fontSize:16}, price:{color:'#0B3D91', fontWeight:'bold', marginTop:5},
+  sec:{fontSize:18, fontWeight:'bold', margin:15}, back:{padding:15, alignItems:'center'},
+  moneyBox:{backgroundColor:'#0B3D91', margin:15, padding:20, borderRadius:12, alignItems:'center'}
+});
