@@ -4,19 +4,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Setup EAS
-        run: npm install -g eas-cli
-      - name: Install deps
-        run: npm install --legacy-peer-deps
-      - name: Trigger Expo Build
-        run: |
-          npx eas-cli build --platform android --profile preview --non-interactive --no-wait || echo "Build triggered"
-          exit 0
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - run: npm install
+      - run: npx expo prebuild --platform android --clean
+      - run: cd android && chmod +x gradlew && ./gradlew assembleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zan-delivery-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
