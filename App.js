@@ -118,6 +118,12 @@ const lipaDeniLeo = async () => {
     }}
   ]);
 };
+  // ANGALIA KAMA AMELIPA LEO
+const amelipaLeo = () => {
+  if (!currentUser) return true;
+  const leo = new Date().toDateString();
+  return deniLililolipwa[currentUser.simu + '_' + leo] === true;
+};
   const toggleDark = async (v) => { setDarkMode(v); await AsyncStorage.setItem('zan_dark', JSON.stringify(v)); };
   const toggleFinger = async (v) => {
     setFingerprintOn(v); await AsyncStorage.setItem('zan_fingerprint', JSON.stringify(v));
