@@ -76,6 +76,48 @@ const [deniLililolipwa, setDeniLililolipwa] = useState({});
 
   const saveUsers = async (l) => { setUsers(l); await AsyncStorage.setItem('zan_users_final', JSON.stringify(l)); };
   const saveOrders = async (l) => { setOrders(l); await AsyncStorage.setItem('zan_orders_final', JSON.stringify(l)); };
+  // HIFADHI LIPA NAMBA YANGU
+const saveLipaNambaYangu = async () => {
+  if (!lipaNamba.trim()) { Alert.alert('Kosa', 'Weka Lipa Namba au Namba ya Simu kwanza'); return; }
+  const updated = users.map(u => u.simu === currentUser.simu ? { ...u, lipaNamba: lipaNamba.trim() } : u);
+  await saveUsers(updated);
+  const me = { ...currentUser, lipaNamba: lipaNamba.trim() };
+  setCurrentUser(me);
+  await AsyncStorage.setItem('zan_session_final', JSON.stringify(me));
+  Alert.alert('Hongera!', 'Lipa Namba yako imehifadhiwa: ' + lipaNamba.trim());
+};
+
+// HESABU DENI LA LEO
+const hesabuDeniLeo = () => {
+  if (!currentUser) return 0;
+  const leo = new Date().toDateString();
+  const kaziZangu = orders.filter(o => {
+    const niLeo = new Date(o.tarehe || Date.now()).toDateString() === leo;
+    const niYangu = o.dereva === currentUser.simu || o.fundi === currentUser.simu || o.mgahawa === currentUser.simu;
+    return niLeo && niYangu && o.status === 'Imekamilika';
+  });
+  const jumla = kaziZangu.reduce((s, o) => s + (Number(o.bei) || 0), 0);
+  let rate = 0;
+  if (currentUser.role === 'dereva' || currentUser.role === 'fundi') rate = 0.15;
+  if (currentUser.role === 'mgahawa') rate = 0.10;
+  return Math.round(jumla * rate);
+};
+
+// LIPA DENI
+const lipaDeniLeo = async () => {
+  const deni = hesabuDeniLeo();
+  if (deni <= 0) { Alert.alert('Huna Deni', 'Huna deni la leo'); return; }
+  Alert.alert('Lipa kwa Zan Delivery', `Deni lako leo: TZS ${deni}\nLipa kwa: ${zanLipaNamba}`, [
+    { text: 'Ghairi' },
+    { text: 'NIMELIPA', onPress: async () => {
+      const leo = new Date().toDateString();
+      const mpya = { ...deniLililolipwa, [currentUser.simu + '_' + leo]: true };
+      setDeniLililolipwa(mpya);
+      await AsyncStorage.setItem('zan_deni', JSON.stringify(mpya));
+      Alert.alert('Asante!', 'Malipo yamepokelewa.');
+    }}
+  ]);
+};
   const toggleDark = async (v) => { setDarkMode(v); await AsyncStorage.setItem('zan_dark', JSON.stringify(v)); };
   const toggleFinger = async (v) => {
     setFingerprintOn(v); await AsyncStorage.setItem('zan_fingerprint', JSON.stringify(v));
