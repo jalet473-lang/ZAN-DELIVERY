@@ -459,6 +459,21 @@ const amelipaLeo = () => {
             const list = users.map(x => x.simu === currentUser.simu ? { ...x, password: newPassword } : x);
             await saveUsers(list); setNewPassword(''); setConfirmPassword(''); Alert.alert('Hongera', 'Password imebadilishwa');
           }}><Text style={s.mainBtnText}>BADILISHA PASSWORD YANGU</Text></TouchableOpacity>
+            {/* LIPA NAMBA & DENI */}
+<Text style={[s.label, { marginTop: 20 }]}>💰 Lipa Namba Yangu</Text>
+<TextInput style={s.input3d} placeholder="Weka Lipa Namba / Namba ya Simu" value={lipaNamba} onChangeText={setLipaNamba} keyboardType="numeric" />
+<TouchableOpacity style={[s.mainBtn3d, { backgroundColor: C.green }]} onPress={saveLipaNambaYangu}>
+  <Text style={s.mainBtnText}>HIFADHI LIPA NAMBA</Text>
+</TouchableOpacity>
+
+<Text style={[s.label, { marginTop: 20 }]}>Deni la Leo: TZS {hesabuDeniLeo()}</Text>
+{!amelipaLeo() && hesabuDeniLeo() > 0 ? (
+  <TouchableOpacity style={[s.mainBtn3d, { backgroundColor: C.red }]} onPress={lipaDeniLeo}>
+    <Text style={s.mainBtnText}>LIPA DENI SASA - TZS {hesabuDeniLeo()}</Text>
+  </TouchableOpacity>
+) : (
+  <Text style={{ color: C.gray, fontSize: 12 }}>Huna deni la leo au umeshalipa ✅</Text>
+)}
           <TouchableOpacity style={[s.mainBtn3d, { backgroundColor: C.red }]} onPress={async () => { await AsyncStorage.clear(); setUsers([]); setOrders([]); setMaoniList([]); Alert.alert('Imesafishwa'); }}><Text style={s.mainBtnText}>FUTA DATA ZOTE (Admin)</Text></TouchableOpacity>
         </View>
       )}
